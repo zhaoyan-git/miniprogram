@@ -1,0 +1,79 @@
+/* pages/my/my.wxss */
+.container {
+  background: #f7f8fa;
+}
+
+van-cell-group {
+  margin: 32rpx 0;
+  width: 100%;
+}
+
+.top-card {
+  width: 100vw;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-top: 70px;
+  z-index: 0;
+}
+
+.info-background {
+  background: -webkit-linear-gradient(top, #00706b, #00bdb5);
+  width: 100vw;
+  height: 185px;
+  position: absolute;
+  z-index: 0;
+}
+
+.data-card {
+  width: 85vw;
+  box-shadow: 0 8px 12px #ebedf0;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.data-card .title {
+  padding: 10px 15px;
+  display: block;
+  font-weight: 600;
+}
+
+.data-card .data-title {
+  font-size: 24rpx;
+}
+
+.data-card .data-value {
+  margin-top: 10rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #00706b;
+}
+
+.info-card {
+  width: 80vw;
+}
+
+.info-card .info-avatar {
+  border: 2px #FFF solid;
+  border-radius: 99px;
+  width: 30px;
+  height: 30px;
+}
+
+.info-card .info-text {
+  color: #FFF;
+  font-weight: 600;
+}
+
+.info-card .info-nickname {
+  line-height: 30px;
+}
+
+.info-card .info-business {
+  font-size: 13px;
+  font-weight: 500;
+}

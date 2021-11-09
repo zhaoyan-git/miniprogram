@@ -1,0 +1,11 @@
+<!--pages/update_password/index.wxml-->
+<van-nav-bar title="修改密码" left-arrow bind:click-left="onClickLeft" />
+<view class="container">
+  <van-toast id="van-toast" />
+  <van-cell-group style="width: 90vw;">
+    <van-field value="{{ oldPassword }}" type="password" label="旧密码" placeholder="请输入旧密码" required border="{{ false }}" bind:input="onInputOldPwd"/>
+    <van-field value="{{ newPassword }}" type="password" label="新密码" placeholder="请输入新密码" required border="{{ false }}" bind:input="onInputNewPwd"/>
+    <van-field value="{{ confirmPassword }}" type="password" label="确认密码" placeholder="请确认密码" required border="{{ false }}" bind:input="onInputConfirmPwd" />
+    <van-button type="primary" block bindtap="doUpdatePwd">修改密码</van-button>
+  </van-cell-group>
+</view>

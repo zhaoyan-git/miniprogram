@@ -1,0 +1,49 @@
+<!--pages/my/my.wxml-->
+<view class="container">
+  <view class="info-background"> </view>
+  <view class="top-card">
+    <van-row class="info-card">
+      <van-col span="5">
+        <van-image custom-class="info-avatar" round width="3rem" height="3rem"
+          src="{{'' == user.avatar ? '/image/profile.jpg' : user.avatar}}" />
+      </van-col>
+      <van-col span="19" class="info-text">
+        <view class="info-nickname">{{user.nickName}}</view>
+        <view class="info-business">所属企业：{{data.business.name}}</view>
+      </van-col>
+    </van-row>
+    <view class="data-card">
+      <van-grid column-num="3">
+        <van-grid-item use-slot>
+          <van-row class="data-title">
+            <van-col span="24">结构物</van-col>
+          </van-row>
+          <van-row class="data-value">
+            <van-col span="24">{{data.structureCount}}</van-col>
+          </van-row>
+        </van-grid-item>
+        <van-grid-item use-slot>
+          <van-row class="data-title">
+            <van-col span="24">测点数</van-col>
+          </van-row>
+          <van-row class="data-value">
+            <van-col span="24">{{data.pointCount}}</van-col>
+          </van-row>
+        </van-grid-item>
+        <van-grid-item use-slot>
+          <van-row class="data-title">
+            <van-col span="24">设备数</van-col>
+          </van-row>
+          <van-row class="data-value">
+            <van-col span="24">{{data.deviceCount}}</van-col>
+          </van-row>
+        </van-grid-item>
+      </van-grid>
+    </view>
+  </view>
+  <van-cell-group inset>
+    <van-cell title="修改密码" is-link bindtap="goPage" data-url="/pages/update_password/index" />
+    <!-- <van-cell title="修改密码" is-link bindtap="test" /> -->
+    <van-cell title="关于我们" is-link />
+  </van-cell-group>
+</view>

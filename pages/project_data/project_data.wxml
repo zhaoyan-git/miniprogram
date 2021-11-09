@@ -1,0 +1,78 @@
+<!--pages/project_data/project_data.wxml-->
+<van-nav-bar title="项目详情" left-arrow bind:click-left="onClickLeft" />
+<view class="container">
+  <van-cell-group class="project">
+    <van-dropdown-menu class="dropdown" active-color="#00706b">
+      <van-dropdown-item title="{{ '' == selectedStructure.name ? '请选择结构物' : selectedStructure.name}}"
+        bind:open="dropdownOpen" bind:closed="dropdownClosed">
+        <van-empty description="无数据" wx:if="{{null == structureList || 0 == structureList.length}}" />
+        <van-radio-group value="{{ selectedStructure.id }}" bind:change="onChangeStructure">
+          <van-cell-group>
+            <van-cell title="{{item.name}}" clickable data-id="{{item.id}}" data-name="{{item.name}}"
+              bind:click="onClickStructure" wx:for="{{structureList}}" wx:for-item="item" wx:key="id">
+              <van-radio slot="right-icon" name="{{item.id}}" data-id="{{item.id}}" data-name="{{item.name}}" />
+            </van-cell>
+          </van-cell-group>
+        </van-radio-group>
+      </van-dropdown-item>
+      <van-dropdown-item title="{{ itemTitle2 }}" bind:open="dropdownOpen" bind:closed="dropdownClosed">
+        <van-collapse accordion value="{{ collapseActiveName }}" bind:change="onChangeCollapseActiveName">
+          <van-collapse-item title="测点" name="1" wx:if="{{null != selectedStructure.id && '' != selectedStructure.id}}">
+            <van-tree-select items="{{ pointData }}" main-active-index="{{ mainActiveIndex }}"
+              active-id="{{ activeId }}" bind:click-nav="onClickNav" bind:click-item="onClickItem" />
+          </van-collapse-item>
+          <van-collapse-item title="设备" name="2">
+            <van-empty description="无数据" wx:if="{{null == deviceList || 0 == deviceList.length}}" />
+            <van-radio-group value="{{ selectedDevice.id }}" bind:change="onChangeDevice">
+              <van-cell-group>
+                <van-cell title="{{item.name}}" clickable data-id="{{item.id}}" data-name="{{item.name}}"
+                  bind:click="onClickDevice" wx:for="{{deviceList}}" wx:for-item="item" wx:key="id">
+                  <van-radio slot="right-icon" name="{{item.id}}" data-id="{{item.id}}" data-name="{{item.name}}" />
+                </van-cell>
+              </van-cell-group>
+            </van-radio-group>
+          </van-collapse-item>
+        </van-collapse>
+      </van-dropdown-item>
+    </van-dropdown-menu>
+
+    <van-grid column-num="4">
+      <van-grid-item use-slot>
+        <van-row class="data-title">
+          <van-col span="24">结构物</van-col>
+        </van-row>
+        <van-row class="data-value">
+          <van-col span="24">{{structureCount}}</van-col>
+        </van-row>
+      </van-grid-item>
+      <van-grid-item use-slot>
+        <van-row class="data-title">
+          <van-col span="24">测点数</van-col>
+        </van-row>
+        <van-row class="data-value">
+          <van-col span="24">{{pointCount}}</van-col>
+        </van-row>
+      </van-grid-item>
+      <van-grid-item use-slot>
+        <van-row class="data-title">
+          <van-col span="24">DTO数</van-col>
+        </van-row>
+        <van-row class="data-value">
+          <van-col span="24">{{dtoCount}}</van-col>
+        </van-row>
+      </van-grid-item>
+      <van-grid-item use-slot>
+        <van-row class="data-title">
+          <van-col span="24">报警数</van-col>
+        </van-row>
+        <van-row class="data-value">
+          <van-col span="24">{{alarmCount}}</van-col>
+        </van-row>
+      </van-grid-item>
+    </van-grid>
+  </van-cell-group>
+
+  <view class="chart-pannel">
+    <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}" wx:if="{{chartShowStatus}}"></ec-canvas>
+  </view>
+</view>

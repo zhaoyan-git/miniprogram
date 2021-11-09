@@ -1,0 +1,115 @@
+/* pages/project_data/project_data.wxss */
+.container {
+  background: #f7f8fa;
+}
+
+van-cell-group {
+  margin: 32rpx 32rpx;
+  width: calc(100% - 64rpx);
+}
+
+.project {
+  box-shadow: 0 8px 12px #ebedf0;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.project .title {
+  padding: 10px 15px;
+  display: block;
+  font-weight: 600;
+}
+
+.project .data-title {
+  font-size: 24rpx;
+}
+
+.project .data-value {
+  margin-top: 10rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #00706b;
+}
+
+.select-condition {
+  height: 50px;
+  font-size: var(--dropdown-menu-title-font-size, 15px);
+}
+
+.van-dropdown-menu {
+  display: flex;
+  box-shadow: 0 2px 12px rgba(100, 101, 102, .12);
+  -webkit-user-select: none;
+  user-select: none;
+  height: 50px;
+  height: var(--dropdown-menu-height, 50px);
+  background-color: #fff;
+  background-color: var(--dropdown-menu-background-color, #fff);
+}
+
+.van-dropdown-menu__item {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.van-dropdown-menu__title {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0 8px;
+  padding: var(--dropdown-menu-title-padding, 0 8px);
+  color: #323233;
+  color: var(--dropdown-menu-title-text-color, #323233);
+  font-size: 15px;
+  font-size: var(--dropdown-menu-title-font-size, 15px);
+  line-height: 18px;
+  line-height: var(--dropdown-menu-title-line-height, 18px);
+}
+
+.van-dropdown-menu__title:after {
+  position: absolute;
+  top: 50%;
+  right: -4px;
+  margin-top: -5px;
+  border-color: transparent transparent currentcolor currentcolor;
+  border-style: solid;
+  border-width: 3px;
+  transform: rotate(-45deg);
+  opacity: .8;
+  content: "";
+}
+
+.van-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.project .dropdown {
+  text-align: left;
+}
+
+.project .dropdown .van-collapse-item__content {
+  padding: 0;
+}
+
+.van-sidebar-item--selected {
+  border-color: #00706b !important;
+}
+
+.van-tree-select__item--active {
+  color: #00706b !important;
+}
+
+.chart-pannel {
+  position: absolute;
+  top: 260px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

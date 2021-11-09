@@ -1,0 +1,22 @@
+<!--pages/login/login.wxml-->
+<view class="container">
+  <van-nav-bar>
+  </van-nav-bar>
+  <van-dialog id="van-dialog" />
+  <view class="login-card">
+    <h1 class="title">文兴创科物联网管理系统</h1>
+    <van-row>
+      <van-col span="24">
+        <van-field left-icon="contact" value="{{ value }}" placeholder="请输入用户名" border="{{ true }}"
+          bind:input="onChangeUsername" size="large" />
+      </van-col>
+      <van-col span="24">
+        <van-field left-icon="lock" value="{{ value }}" type="password" placeholder="请输入密码" border="{{ true }}"
+          bind:input="onChangePassword" size="large" />
+      </van-col>
+    </van-row>
+    <van-button class="login-button" type="primary" size="large" bind:tap="doLogin">登录</van-button>
+  </view>
+
+
+</view>

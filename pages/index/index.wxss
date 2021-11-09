@@ -1,0 +1,33 @@
+/**index.wxss**/
+.container {
+  background: #f7f8fa;
+}
+
+van-cell-group {
+  margin: 32rpx 32rpx;
+  width: calc(100% - 64rpx);
+}
+
+.project {
+  box-shadow: 0 8px 12px #ebedf0;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.project .title{
+  padding: 10px 15px;
+  display: block;
+  font-weight: 600;
+}
+
+.project .data-title {
+  font-size: 24rpx;
+}
+
+.project .data-value {
+  margin-top: 10rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #00706b;
+}

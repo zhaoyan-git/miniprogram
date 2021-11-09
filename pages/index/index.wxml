@@ -1,0 +1,44 @@
+<!--index.wxml-->
+<van-nav-bar title="项目列表" />
+<view class="container">
+  <van-empty description="无数据" wx:if="{{null == projectList || 0 == projectList.length}}" />
+  <van-cell-group class="project" wx:for="{{projectList}}" wx:for-item="item" wx:key="id" data-id="{{item.id}}"
+    data-structureCount="{{item.structureCount}}" data-pointCount="{{item.pointCount}}"
+    data-dtoCount="{{item.dtoCount}}" data-alarmCount="{{item.alarmCount}}" bindtap="goProjectData">
+    <h3 class="title">{{item.name}}</h3>
+    <van-grid column-num="4">
+      <van-grid-item use-slot>
+        <van-row class="data-title">
+          <van-col span="24">结构物</van-col>
+        </van-row>
+        <van-row class="data-value">
+          <van-col span="24">{{item.structureCount}}</van-col>
+        </van-row>
+      </van-grid-item>
+      <van-grid-item use-slot>
+        <van-row class="data-title">
+          <van-col span="24">测点数</van-col>
+        </van-row>
+        <van-row class="data-value">
+          <van-col span="24">{{item.pointCount}}</van-col>
+        </van-row>
+      </van-grid-item>
+      <van-grid-item use-slot>
+        <van-row class="data-title">
+          <van-col span="24">DTO数</van-col>
+        </van-row>
+        <van-row class="data-value">
+          <van-col span="24">{{item.dtoCount}}</van-col>
+        </van-row>
+      </van-grid-item>
+      <van-grid-item use-slot>
+        <van-row class="data-title">
+          <van-col span="24">报警数</van-col>
+        </van-row>
+        <van-row class="data-value">
+          <van-col span="24">{{item.alarmCount}}</van-col>
+        </van-row>
+      </van-grid-item>
+    </van-grid>
+  </van-cell-group>
+</view>

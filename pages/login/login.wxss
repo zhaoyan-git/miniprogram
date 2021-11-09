@@ -1,0 +1,28 @@
+/* pages/login/login.wxss */
+.container {
+  background: -webkit-linear-gradient(top, #00706b, #00bdb5);
+}
+
+.login-card{
+  margin-top: 100rpx;
+  width: 80vw;
+  height: 550rpx;
+  padding: 35rpx;
+  padding-top: 85rpx;
+  background-color: #FFF;
+  border-radius: 40rpx;
+  box-shadow: 0 0 10px 5px #6f6f6fa6;
+}
+
+.title{
+  font-size: 45rpx;
+  text-align: center;
+  display: block;
+  margin: 0 auto 80rpx auto;
+}
+
+.login-button{
+  margin-top: 100rpx;
+  display: block;
+  border-radius: 35rpx;
+}
