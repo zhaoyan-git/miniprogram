@@ -113,3 +113,7 @@ van-cell-group {
   left: 0;
   right: 0;
 }
+
+.van-hairline--top-bottom:after {
+  border: none !important;
+}

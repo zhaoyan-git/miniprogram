@@ -1,5 +1,6 @@
 // const host = 'https://shidaiheima.ltd'
-const host = 'http://localhost:8080'
+// const host = 'http://localhost:8080'
+const host = 'http://192.168.1.58:8080'
 
 const config = {
   loginUrl: host + "/api/miniprogram/login",
