@@ -43,7 +43,8 @@
   </view>
   <van-cell-group inset>
     <van-cell title="修改密码" is-link bindtap="goPage" data-url="/pages/update_password/index" />
+    <van-cell title="退出登录" is-link bindtap="doLogout" data-url="/pages/update_password/index" />
     <!-- <van-cell title="修改密码" is-link bindtap="test" /> -->
-    <van-cell title="关于我们" is-link />
+    <!-- <van-cell title="关于我们" is-link /> -->
   </van-cell-group>
 </view>

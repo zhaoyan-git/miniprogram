@@ -1,7 +1,9 @@
 <!--pages/alarm/alarm.wxml-->
 <van-nav-bar title="报警通知" />
 <view class="container">
-  <van-cell-group class="project" inset>
+  <!-- <van-cell-group class="project" inset>
     <van-cell title="报警标题" label="报警内容" is-link/>
-  </van-cell-group>
+  </van-cell-group> -->
+
+  <van-empty description="无数据" />
 </view>

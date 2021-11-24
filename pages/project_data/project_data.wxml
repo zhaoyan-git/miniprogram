@@ -15,7 +15,8 @@
           </van-cell-group>
         </van-radio-group>
       </van-dropdown-item>
-      <van-dropdown-item title="{{ itemTitle2 }}" bind:open="dropdownOpen" bind:closed="dropdownClosed">
+      <van-dropdown-item title="{{ itemTitle2 }}" bind:open="dropdownOpen" bind:closed="dropdownClosed"
+        id="dataCondition">
         <van-collapse accordion value="{{ collapseActiveName }}" bind:change="onChangeCollapseActiveName">
           <van-collapse-item title="测点" name="1" wx:if="{{null != selectedStructure.id && '' != selectedStructure.id}}">
             <van-tree-select items="{{ pointData }}" main-active-index="{{ mainActiveIndex }}"
@@ -23,7 +24,7 @@
           </van-collapse-item>
           <van-collapse-item title="设备" name="2">
             <van-empty description="无数据" wx:if="{{null == deviceList || 0 == deviceList.length}}" />
-            <van-radio-group value="{{ selectedDevice.id }}" bind:change="onChangeDevice">
+            <van-radio-group value="{{ selectedDevice.id }}">
               <van-cell-group>
                 <van-cell title="{{item.name}}" clickable data-id="{{item.id}}" data-name="{{item.name}}"
                   bind:click="onClickDevice" wx:for="{{deviceList}}" wx:for-item="item" wx:key="id">
@@ -35,6 +36,10 @@
         </van-collapse>
       </van-dropdown-item>
     </van-dropdown-menu>
+
+    <van-cell title="选择日期区间" label="{{ conditionDate }}" bind:click="onDisplay" />
+    <van-calendar show="{{ conditionShow }}" type="range" bind:close="onClose" bind:confirm="onConfirm"
+      show-confirm="{{ false }}" color="#00706b" min-date="{{ conditionDateMinDate }}" />
 
     <van-grid column-num="4">
       <van-grid-item use-slot>
@@ -72,7 +77,9 @@
     </van-grid>
   </van-cell-group>
 
+  <van-empty description="无数据" wx:if="{{null == chartOptionSeries || 0 == chartOptionSeries.length}}" />
+
   <view class="chart-pannel">
-    <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}" wx:if="{{chartShowStatus}}"></ec-canvas>
+    <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}" wx:if="{{chartShowStatus && null != chartOptionSeries && 0 != chartOptionSeries.length}}"></ec-canvas>
   </view>
 </view>

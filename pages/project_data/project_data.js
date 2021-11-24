@@ -13,24 +13,6 @@ function initChart(canvas, width, height, dpr) {
   });
   canvas.setChart(chart);
 
-  var option = {
-    xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    },
-    yAxis: {
-      type: 'value'
-    },
-    series: [
-      {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line',
-        smooth: true
-      }
-    ]
-  };
-
-  chart.setOption(option);
   return chart;
 }
 
@@ -64,7 +46,14 @@ Page({
     mainActiveIndex: 0,
     activeId: null,
     pointData: [],
-    chartShowStatus: true
+    chartShowStatus: true,
+    chartOptionSeries: [],
+    conditionDate: '',
+    beginReleaseTime: '',
+    endReleaseTime: '',
+    conditionShow: false,
+    conditionDateMinDate: new Date(2020, 10, 1).getTime(),
+
   },
 
   /**
@@ -93,13 +82,13 @@ Page({
     })
 
     this.getDeviceList()
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
@@ -181,16 +170,11 @@ Page({
     });
   },
   // 选择设备事件
-  onChangeDevice(event) {
-    this.setData({
-      selectedDevice: event.currentTarget.dataset,
-    });
-  },
-  // 选择设备事件
   onClickDevice(event) {
     this.setData({
       selectedDevice: event.currentTarget.dataset,
     });
+    this.getDeviceData()
   },
   // 根据结构物ID获取测点
   getProjectPointList() {
@@ -234,10 +218,12 @@ Page({
       mainActiveIndex: detail.index || 0,
     });
   },
+  // 选择测点
   onClickItem({ detail = {} }) {
     const activeId = this.data.activeId === detail.id ? null : detail.id;
+    this.setData({ activeId: activeId });
 
-    this.setData({ activeId });
+    this.getPointData()
   },
   // 下拉打开
   dropdownOpen() {
@@ -250,10 +236,167 @@ Page({
   },
   // 下拉关闭
   dropdownClosed() {
+    var that = this
+
     this.setData({
       chartShowStatus: true
     })
 
-  }
+    setTimeout(function () {
+      that.setChartOption()
+    }, 100)
+  },
+  setChartOption() {
+    chart.setOption({
+      xAxis: {
+        type: 'category'
+      },
+      tooltip: {
+        trigger: "axis",
+        axisPointer: {
+          type: "cross",
+        },
+        padding: [5, 10],
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: this.data.chartOptionSeries
+    });
+  },
+  onDisplay() {
+    this.setData({ conditionShow: true });
+  },
+  onClose() {
+    this.setData({ conditionShow: false });
+  },
+  formatDate(date) {
+    date = new Date(date);
+    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+  },
+  formatDateParams(date) {
+    date = new Date(date);
 
+    var hours = ''
+    if (date.getHours() < 10) {
+      hours = '0' + date.getHours()
+    }
+
+    var minutes = ''
+    if (date.getMinutes() < 10) {
+      minutes = '0' + date.getMinutes()
+    }
+
+    return `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}` + hours + minutes;
+  },
+  onConfirm(event) {
+    const [start, end] = event.detail;
+    this.setData({
+      conditionShow: false,
+      conditionDate: `${this.formatDate(start)} - ${this.formatDate(end)}`,
+      beginReleaseTime: `${this.formatDateParams(start)}`,
+      endReleaseTime: `${this.formatDateParams(end)}`
+    });
+
+    this.getData()
+  },
+  // 获取数据
+  getData() {
+    if (null != this.data.activeId && '' != this.data.activeId) {
+      this.getPointData()
+    } else if (null != this.data.selectedDevice.id || '' != this.data.selectedDevice.id) {
+      this.getDeviceData()
+    }
+  },
+  // 获取测点数据
+  getPointData() {
+    var that = this
+    if (null != that.data.activeId) {
+      // 获取测点数据
+      app.request({
+        method: 'post',
+        url: app.config.listStructurePointData,
+        data: {
+          structureId: that.data.selectedStructure.id,
+          pointId: that.data.activeId
+        },
+        contentType: "application/json;charset=UTF-8"
+      }).then(res => {
+        var data = [];
+
+        for (var i = 0; i < res.data.length; i++) {
+          var item = res.data[i]
+          data.push([
+            item.createTime,
+            item.data
+          ])
+        }
+
+        if (0 != data.length) {
+          this.setData({
+            chartOptionSeries: [{
+              data: data,
+              type:
+                'line',
+              smooth:
+                true
+            }]
+          })
+        } else {
+          this.setData({
+            chartOptionSeries: []
+          })
+        }
+
+        this.selectComponent('#dataCondition').toggle(false)
+      })
+    } else {
+      this.setData({
+        chartOptionSeries: []
+      })
+    }
+  },
+  // 获取设备数据
+  getDeviceData() {
+    // 获取设备数据
+    app.request({
+      method: 'post',
+      url: app.config.listProjectDeivceSensorData,
+      data: {
+        deviceId: this.data.selectedDevice.id
+      },
+      contentType: "application/json;charset=UTF-8"
+    }).then(res => {
+      // 生成图表数据
+      var data = [];
+
+      for (var i = 0; i < res.data.length; i++) {
+        var item = res.data[i]
+        var itemData = []
+
+        for (var j = 0; j < item.length; j++) {
+          itemData.push([
+            item[j].createTime,
+            item[j].data
+          ])
+        }
+        data.push({
+          data: itemData,
+          type:
+            'line',
+          smooth:
+            true
+        })
+      }
+
+      this.setData({
+        chartOptionSeries: data
+      })
+
+      this.selectComponent('#dataCondition').toggle(false)
+    })
+  },
+  onOpened() {
+    console.log(1)
+  }
 })

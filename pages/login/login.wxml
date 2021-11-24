@@ -4,7 +4,7 @@
   </van-nav-bar>
   <van-dialog id="van-dialog" />
   <view class="login-card">
-    <h1 class="title">文兴创科物联网管理系统</h1>
+    <h1 class="title">云监控管理系统</h1>
     <van-row>
       <van-col span="24">
         <van-field left-icon="contact" value="{{ value }}" placeholder="请输入用户名" border="{{ true }}"

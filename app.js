@@ -52,10 +52,6 @@ App({
                 wx.setStorageSync("permissions", res.data.permissions)
                 wx.setStorageSync("roles", res.data.roles)
                 wx.setStorageSync("user", res.data.user)
-
-                // that.globalData.permissions = res.data.permissions
-                // that.globalData.roles = res.data.roles
-                // that.globalData.user = res.data.user
               })
             }
           } else {
@@ -95,19 +91,11 @@ App({
           if (res.statusCode == 401) {
             //如果是token过期
             //返回首页 重新登录
-            setTimeout(() => {
-              wx.reLaunch({
-                url: '/pages/login/login'
-              })
-            }, 100)
+            this.doLogout()
 
           } else if (res.statusCode == 200) {
             if (401 == res.data.code) {
-              wx.showToast({
-                title: '无权限访问该资源！',
-                icon: 'error',
-                duration: 2000
-              })
+              this.doLogout()
             }
 
             resolve(res)
@@ -131,5 +119,19 @@ App({
     })
 
   },
-  // 每次打开检查登录状态
+  // 注销
+  doLogout() {
+    // 清空登录信息
+    wx.setStorageSync("loginInfo", null)
+    wx.setStorageSync("permissions", null)
+    wx.setStorageSync("roles", null)
+    wx.setStorageSync("user", null)
+
+    setTimeout(() => {
+      wx.reLaunch({
+        url: '/pages/login/login'
+      })
+    }, 100)
+  }
+  // TODO 每次打开检查登录状态
 })

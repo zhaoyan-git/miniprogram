@@ -87,7 +87,18 @@ Page({
       url: e.currentTarget.dataset.url,
     })
   },
-  test() {
-    console.log(123)
+  // 注销
+  doLogout() {
+    wx.setStorageSync("loginInfo", null)
+
+    wx.setStorageSync("permissions", null)
+    wx.setStorageSync("roles", null)
+    wx.setStorageSync("user", null)
+
+    setTimeout(() => {
+      wx.reLaunch({
+        url: '/pages/login/login'
+      })
+    }, 100)
   }
 })
