@@ -1,9 +1,28 @@
 <!--pages/alarm/alarm.wxml-->
 <van-nav-bar title="报警通知" />
-<view class="container">
-  <!-- <van-cell-group class="project" inset>
-    <van-cell title="报警标题" label="报警内容" is-link/>
-  </van-cell-group> -->
+<van-dropdown-menu active-color="#00706b">
+  <van-dropdown-item value="{{conditionProjectId}}" options="{{ optionProject }}" bind:change="conditionProjectChange" />
+  <van-dropdown-item value="{{conditionReadFlag}}" options="{{ optionReadFlag }}" bind:change="conditionReadFlagChange" title="是否已读" />
+</van-dropdown-menu>
 
-  <van-empty description="无数据" />
+<view class="container">
+  <van-loading style="margin-top: 25px;" wx:if="{{loadingFlag}}" />
+
+  <van-cell-group wx:if="{{null != list && 0 < list.length}}" class="project" inset wx:for="{{list}}" wx:for-item="item" wx:for-index="idx" wx:key="id" data-index="{{idx}}" bindtap="goDetail">
+    <van-cell is-link>
+      <view slot="title">
+        <view class="van-cell-text">
+          {{item.title}}
+          <van-tag type="danger" wx:if="{{0 == item.readFlag}}">未读</van-tag>
+          <van-tag type="success" wx:if="{{1 == item.readFlag}}">已读</van-tag>
+        </view>
+        <view class="van-cell-text">
+          {{item.content}}
+        </view>
+
+      </view>
+    </van-cell>
+  </van-cell-group>
+
+  <van-empty description="无数据" wx:if="{{!loadingFlag && (null == list || 0 == list.length)}}" />
 </view>

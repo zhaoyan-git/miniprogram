@@ -1,0 +1,13 @@
+<!--pages/alarm_detail/alarm_detail.wxml-->
+<van-nav-bar title="报警详情" left-arrow bind:click-left="onClickLeft" />
+<van-cell-group>
+  <van-field
+    value="{{ alarmRecord.title }}"
+    label="报警标题"
+  />
+
+  <van-field
+    value="{{ alarmRecord.content }}"
+    label="报警内容"
+  />
+</van-cell-group>

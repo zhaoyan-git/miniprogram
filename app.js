@@ -91,11 +91,11 @@ App({
           if (res.statusCode == 401) {
             //如果是token过期
             //返回首页 重新登录
-            this.doLogout()
+            that.doLogout()
 
           } else if (res.statusCode == 200) {
             if (401 == res.data.code) {
-              this.doLogout()
+              that.doLogout()
             }
 
             resolve(res)
@@ -114,6 +114,9 @@ App({
             icon: 'error',
             duration: 2000
           })
+
+          //返回首页 重新登录
+          that.doLogout()
         }
       })
     })

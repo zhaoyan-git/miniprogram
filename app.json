@@ -22,7 +22,8 @@
     "pages/my/my",
     "pages/alarm/alarm",
     "pages/project_data/project_data",
-    "pages/update_password/index"
+    "pages/update_password/index",
+    "pages/alarm_detail/alarm_detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -42,6 +42,9 @@ Component({
     forceUseOldCanvas: {
       type: Boolean,
       value: false
+    },
+    uData: {
+      type: Object
     }
   },
 
@@ -123,7 +126,7 @@ Component({
           this.chart = callback(canvas, res.width, res.height, canvasDpr);
         }
         else if (this.data.ec && typeof this.data.ec.onInit === 'function') {
-          this.chart = this.data.ec.onInit(canvas, res.width, res.height, canvasDpr);
+          this.chart = this.data.ec.onInit(canvas, res.width, res.height, canvasDpr, this.data.uData);
         }
         else {
           this.triggerEvent('init', {
@@ -160,7 +163,7 @@ Component({
           if (typeof callback === 'function') {
             this.chart = callback(canvas, canvasWidth, canvasHeight, canvasDpr)
           } else if (this.data.ec && typeof this.data.ec.onInit === 'function') {
-            this.chart = this.data.ec.onInit(canvas, canvasWidth, canvasHeight, canvasDpr)
+            this.chart = this.data.ec.onInit(canvas, canvasWidth, canvasHeight, canvasDpr, this.data.uData)
           } else {
             this.triggerEvent('init', {
               canvas: canvas,

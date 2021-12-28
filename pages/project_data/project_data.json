@@ -15,6 +15,8 @@
     "van-collapse": "@vant/weapp/collapse/index",
     "van-collapse-item": "@vant/weapp/collapse-item/index",
     "van-tree-select": "@vant/weapp/tree-select/index",
-    "van-calendar": "@vant/weapp/calendar/index"
+    "van-calendar": "@vant/weapp/calendar/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-loading": "@vant/weapp/loading/index"
   }
 }

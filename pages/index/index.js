@@ -4,7 +4,13 @@ const app = getApp()
 
 Page({
   data: {
-    projectList: []
+    projectList: [],
+    alarmColor: [
+      '#ffffff',
+      '#ff0000',
+      '#ffad00',
+      '#fff700'
+    ]
   },
   onLoad: function () {
   },
@@ -29,6 +35,6 @@ Page({
         '&dtoCount=' + e.currentTarget.dataset.dtocount +
         '&alarmCount=' + e.currentTarget.dataset.alarmcount,
     })
-  }
+  },
 
 })

@@ -2,10 +2,11 @@
 <van-nav-bar title="项目列表" />
 <view class="container">
   <van-empty description="无数据" wx:if="{{null == projectList || 0 == projectList.length}}" />
-  <van-cell-group class="project" wx:for="{{projectList}}" wx:for-item="item" wx:key="id" data-id="{{item.id}}"
-    data-structureCount="{{item.structureCount}}" data-pointCount="{{item.pointCount}}"
-    data-dtoCount="{{item.dtoCount}}" data-alarmCount="{{item.alarmCount}}" bindtap="goProjectData">
-    <h3 class="title">{{item.name}}</h3>
+  <van-cell-group class="project" wx:for="{{projectList}}" wx:for-item="item" wx:key="id" data-id="{{item.id}}" data-structureCount="{{item.structureCount}}" data-pointCount="{{item.pointCount}}" data-dtoCount="{{item.dtoCount}}" data-alarmCount="{{item.alarmCount}}" bindtap="goProjectData">
+    <h3 class="title">
+      {{item.name}}
+      <van-tag color="{{alarmColor[item.alarmFlag]}}" round="true" wx:if="{{0 != item.alarmFlag}}">{{item.alarmFlag}}级报警</van-tag>
+    </h3>
     <van-grid column-num="4">
       <van-grid-item use-slot>
         <van-row class="data-title">
@@ -25,7 +26,7 @@
       </van-grid-item>
       <van-grid-item use-slot>
         <van-row class="data-title">
-          <van-col span="24">DTO数</van-col>
+          <van-col span="24">DTU数</van-col>
         </van-row>
         <van-row class="data-value">
           <van-col span="24">{{item.dtoCount}}</van-col>
